@@ -27,7 +27,6 @@ public:
 	bool getIsPlaying();
 	float getSpeed();
 	float getPan();
-	float getVolume();
 	bool getIsPaused();
 
 private:
