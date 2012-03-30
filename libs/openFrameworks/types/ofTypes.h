@@ -5,6 +5,8 @@
 
 #if (_MSC_VER)
 #include <memory>
+#elif defined(TARGET_QNX)
+#include <boost/tr1/memory.hpp>
 #else
 #include <tr1/memory>
 #endif

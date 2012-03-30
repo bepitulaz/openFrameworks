@@ -7,19 +7,22 @@ Copyright (C) 2012 Laurence Muller
 E-mail: laurence.muller@gmail.com
 Website: http://www.multigesture.net
 
+
 LICENSE
 =======
 New BSD License (3-clause license)
 - LICENSE.txt
 
+
 NOTES
 =====
 This is addon attempts to bring the openFrameworks platform to the BlackBerry PlayBook. 
 
-
 To compile the project you will need to install the BlackBerry Native SDK 2.0 (and Eclipse):
 - https://bdsc.webapps.blackberry.com/native/
 
+
+[Building openFrameworks]
 Since it is a bit complicated to build the required dependencies, I have included binaries that are needed to build the openFrameworks "emptyExample" under "ofxQNX\libs".
 
 If you want to try it out for yourselfs, here are some pointers:
@@ -53,10 +56,47 @@ If you want to try it out for yourselfs, here are some pointers:
 Additional information can be found here:
 http://forum.openframeworks.cc/index.php/topic,9189.msg42786.html#msg42786
 
+
+[Examples]
+Open up eclipse and create a new workspace at:
+- "openFrameworks\examples\qnx"
+
+Next import: 
+- "openFrameworks\libs"
+- "openFrameworks\addons\ofxQNX"
+- The example projects under "openFrameworksPlayBook\examples\qnx"
+
+[Project settings]
+* Defines (-D)
+- _FORTIFY_SOURCE=2
+- USING_GL11
+- TARGET_QNX
+- TARGET_OPENGLES
+- TARGET_LITTLE_ENDIAN
+
+* Libraries (-l)
+- bps
+- screen
+- EGL
+- GLESv1_CM
+- freetype
+- png
+- socket
+- PocoNet
+- PocoUtil
+- PocoXML
+- PocoFoundation
+- freeimage
+- tess2
+- GLU
+- asound
+
+
 NEWS
 =======
 30/03/2012 - beta
 - Initial commit
+
 
 TODO
 ====

@@ -19,7 +19,7 @@
 #endif
 
 
-#if defined(TARGET_OF_IPHONE) || defined(TARGET_OSX ) || defined(TARGET_LINUX)
+#if defined(TARGET_OF_IPHONE) || defined(TARGET_OSX ) || defined(TARGET_LINUX) || defined(TARGET_QNX)
 	#include <sys/time.h>
 #endif
 
@@ -198,6 +198,8 @@ void ofDisableDataPath(){
 	static string dataPathRoot = "../../../data/";
 #elif defined TARGET_ANDROID
 	static string dataPathRoot = "sdcard/";
+#elif defined TARGET_QNX
+	static string dataPathRoot = "app/native/";	
 #elif defined(TARGET_LINUX)
 	static string dataPathRoot = ofFilePath::join(ofFilePath::getCurrentExeDir(),  "data/");
 #else
@@ -713,6 +715,8 @@ ofTargetPlatform ofGetTargetPlatform(){
 	#endif
 #elif defined(TARGET_ANDROID)
 	return OF_TARGET_ANDROID;
+#elif defined(TARGET_QNX)
+	return OF_TARGET_QNX;	
 #elif defined(TARGET_OF_IPHONE)
 	return OF_TARGET_IPHONE;
 #endif

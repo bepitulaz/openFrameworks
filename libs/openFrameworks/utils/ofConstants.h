@@ -18,7 +18,8 @@ enum ofTargetPlatform{
 	OF_TARGET_IPHONE,
 	OF_TARGET_ANDROID,
 	OF_TARGET_LINUX,
-	OF_TARGET_LINUX64
+	OF_TARGET_LINUX64,
+	OF_TARGET_QNX
 };
 //-------------------------------
 //  find the system type --------
@@ -41,6 +42,13 @@ enum ofTargetPlatform{
 #elif defined (ANDROID)
 	#define TARGET_ANDROID
 	#define TARGET_OPENGLES
+#elif defined (__QNX__)
+	#ifndef TARGET_QNX
+		#define TARGET_QNX
+	#endif
+	#ifndef TARGET_OPENGLES
+		#define TARGET_OPENGLES
+	#endif
 #else
 	#define TARGET_LINUX
 #endif
@@ -156,9 +164,29 @@ enum ofTargetPlatform{
 	#define TARGET_LITTLE_ENDIAN
 #endif
 
+#ifdef TARGET_QNX
+	#define GL_GLEXT_PROTOTYPES
+
+	#include <EGL/egl.h>
+	#ifdef USING_GL11
+	#include <GLES/gl.h>
+	#include <GLES/glext.h>
+	#elif defined(USING_GL20)
+	#include <GLES2/gl2.h>
+	#else
+	#error openFrameworks QNX must be compiled with either USING_GL11 or USING_GL20 flags
+	#endif
+
+	#define TARGET_LITTLE_ENDIAN		// arm cpu
+#endif
+
 #ifdef TARGET_OPENGLES
-	#include "glu.h"
-	//typedef GLushort ofIndexType ;
+	#ifdef TARGET_ANDROID
+		#include "glu.h"
+		//typedef GLushort ofIndexType ;
+	#elif defined(TARGET_QNX)
+		#include "glues.h"
+	#endif
 #else
 	//typedef GLuint ofIndexType;
 #endif
@@ -207,6 +235,10 @@ typedef TESSindex ofIndexType;
 
 		#define OF_VIDEO_CAPTURE_ANDROID
 
+	#elif defined(TARGET_QNX)
+
+		#define OF_VIDEO_CAPTURE_QNX
+
 	#elif defined(TARGET_OF_IPHONE)
 
 		#define OF_VIDEO_CAPTURE_IPHONE
@@ -222,7 +254,7 @@ typedef TESSindex ofIndexType;
 	#else
 		#ifdef TARGET_OF_IPHONE
 			#define OF_VIDEO_PLAYER_IPHONE
-		#elif !defined(TARGET_ANDROID)
+		#elif !defined(TARGET_ANDROID) && !defined(TARGET_QNX)
 			#define OF_VIDEO_PLAYER_QUICKTIME
 		#endif
 	#endif
@@ -237,6 +269,8 @@ typedef TESSindex ofIndexType;
 		#define OF_SOUNDSTREAM_RTAUDIO
 	#elif defined(TARGET_ANDROID)
 		#define OF_SOUNDSTREAM_ANDROID
+	#elif defined(TARGET_QNX)
+		#define OF_SOUNDSTREAM_QNX
 	#else
 		#define OF_SOUNDSTREAM_IPHONE
 	#endif
@@ -249,7 +283,7 @@ typedef TESSindex ofIndexType;
   	#define OF_SOUND_PLAYER_IPHONE
   #elif defined TARGET_LINUX
   	#define OF_SOUND_PLAYER_OPENAL
-  #elif !defined(TARGET_ANDROID)
+  #elif !defined(TARGET_ANDROID) && !defined(TARGET_QNX)
   	#define OF_SOUND_PLAYER_FMOD
   #endif
 #endif
