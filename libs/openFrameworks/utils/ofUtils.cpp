@@ -199,7 +199,7 @@ void ofDisableDataPath(){
 #elif defined TARGET_ANDROID
 	static string dataPathRoot = "sdcard/";
 #elif defined TARGET_QNX
-	static string dataPathRoot = "app/native/";	
+	static string dataPathRoot = "/app/native/";	
 #elif defined(TARGET_LINUX)
 	static string dataPathRoot = ofFilePath::join(ofFilePath::getCurrentExeDir(),  "data/");
 #else

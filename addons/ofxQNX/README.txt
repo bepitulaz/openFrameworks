@@ -101,3 +101,12 @@ NEWS
 TODO
 ====
 - Add more examples and instructions on how to compile the dependencies.
+
+
+Examples
+========
+qnxInputExample - demonstrates how to use multitouch input
+qnxGraphicsExample - basic graphics example
+qnxAudioOutputExample - play generated wave (broken atm)
+qnxPolygonExample - Shape A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
+qnxImageLoaderExample - jpg/gif works, need to fix png support (prob related to FreeImage?)

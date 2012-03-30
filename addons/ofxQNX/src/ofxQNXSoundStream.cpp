@@ -246,7 +246,8 @@ int ofxQNXSoundStream::openQNXAudio(){
 	out_float_buffer = new float[bsize*nOutputChannels];
 	out_buffer = new short[bsize*nOutputChannels];
 
-	//ofAddListener(	ofEvents().update, 0, &ofxQNXSoundStream::updateQNXAudio);
+	// (Ab)using the update event from openFrameworks for the callback.
+	// TODO: It's probably better to put this in a new thread and a while loop.
 	ofAddListener(ofEvents().update,this,&ofxQNXSoundStream::updateQNXAudio);
 }
 
