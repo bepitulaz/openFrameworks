@@ -26,6 +26,7 @@
 								<option id="com.qnx.qcc.option.compiler.includePath.571580738" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/addons/ofxAccelerometer/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/boost/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/FreeImage/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/glu/include}&quot;"/>
@@ -96,9 +97,6 @@
 							<tool id="com.qnx.qcc.tool.archiver.993708486" name="QCC Archiver" superClass="com.qnx.qcc.tool.archiver"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.qnx.qcc.configuration.exe.debug.2136424254.1898304096" name="ofGraphics.cpp" rcbsApplicability="disable" resourcePath="openFrameworks/ofGraphics.cpp" toolsToInvoke="com.qnx.qcc.tool.compiler.257138737.1322009687">
-						<tool id="com.qnx.qcc.tool.compiler.257138737.1322009687" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler.257138737"/>
-					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="openFrameworks"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
