@@ -95,6 +95,9 @@ Next import:
 
 NEWS
 =======
+31/03/2012
+- Converted more examples to ofxQNX
+
 30/03/2012 - beta
 - Initial commit
 
@@ -102,15 +105,48 @@ NEWS
 TODO
 ====
 - Add more examples and instructions on how to compile the dependencies.
-- Recompile FreeImage
+- Add gps support
+- Recompile FreeImage (fix png issues?)
 - Check GLUES
+- add keyboard support (useful for qnxFontsExample example) 
+-- https://bdsc.webapps.blackberry.com/native/documentation/keyboard_using_1935244_11.html
+
+[Camera access]
+Currently the Native SDK doesnt provide access to the camera. More info about it here:
+http://supportforums.blackberry.com/t5/Native-SDK-for-BlackBerry-Tablet/Camera-access/m-p/1398701
+So there wont be a qnxCameraExample or qnxOpenCVExample until then.
+
 
 Examples
 ========
-qnxInputExample - demonstrates how to use multitouch input
-qnxGraphicsExample - basic graphics example
-qnxAudioOutputExample - play generated wave (broken atm)
-qnxPolygonExample - Shape A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
-qnxImageLoaderExample - jpg/gif works, need to fix png support (prob related to FreeImage?)
-qnxTouchExample - demonstrates how to use the accelerometer (and touch input)
-qnxVBOExample - vbo example
+qnxInputExample
+- Runs ok 
+- Demonstrates how to enable and use multitouch input in a project
+
+qnxGraphicsExample 
+- Runs ok 
+- Basic graphics example
+
+qnxAudioOutputExample 
+- Runs, but audio is messed up
+- Plays a generate waveform
+
+qnxFontsExample
+- Runs but text is messed up
+- Example on how to use truetype fonts
+
+qnxPolygonExample 
+- Runs but shapes A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
+- Demonstrates how to draw an animated polygon
+
+qnxImageLoaderExample 
+- Runs fine for JPG and GIF, PNG files seem to be broken. (FreeImage issue?)
+- Demonstrates how to use image resources in openFrameworks
+
+qnxTouchExample 
+- Runs ok
+- Demonstrates how to use the accelerometer (and touch input)
+
+qnxVBOExample
+- Runs ok
+- Demonstrates how to use VBO in openFrameworks
