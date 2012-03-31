@@ -113,3 +113,4 @@ qnxAudioOutputExample - play generated wave (broken atm)
 qnxPolygonExample - Shape A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
 qnxImageLoaderExample - jpg/gif works, need to fix png support (prob related to FreeImage?)
 qnxTouchExample - demonstrates how to use the accelerometer (and touch input)
+qnxVBOExample - vbo example

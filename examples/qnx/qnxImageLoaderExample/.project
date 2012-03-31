@@ -205,5 +205,15 @@
 			<type>1</type>
 			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/math/ofVec4f.cpp</locationURI>
 		</link>
+		<link>
+			<name>openFrameworks/ofxAccelerometer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-2-WORKSPACE_LOC/addons/ofxAccelerometer/src/ofxAccelerometer.cpp</locationURI>
+		</link>
+		<link>
+			<name>openFrameworks/ofxQNXAccelerometer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-2-WORKSPACE_LOC/addons/ofxQNX/src/ofxQNXAccelerometer.cpp</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

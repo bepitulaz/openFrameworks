@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>qnxAudioOutputExample</name>
+	<name>qnxVBOExample</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -27,7 +27,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/qnxAudioOutputExample/Device-Debug}</value>
+					<value>${workspace_loc:/qnxVBOExample/Device-Debug}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.contents</key>
@@ -176,11 +176,6 @@
 			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/sound/ofSoundPlayer.cpp</locationURI>
 		</link>
 		<link>
-			<name>openFrameworks/ofSoundStream.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/sound/ofSoundStream.cpp</locationURI>
-		</link>
-		<link>
 			<name>openFrameworks/ofTessellator.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/graphics/ofTessellator.cpp</locationURI>
@@ -206,6 +201,11 @@
 			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/utils/ofUtils.cpp</locationURI>
 		</link>
 		<link>
+			<name>openFrameworks/ofVbo.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/gl/ofVbo.cpp</locationURI>
+		</link>
+		<link>
 			<name>openFrameworks/ofVec4f.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-2-WORKSPACE_LOC/libs/openFrameworks/math/ofVec4f.cpp</locationURI>
@@ -219,11 +219,6 @@
 			<name>openFrameworks/ofxQNXAccelerometer.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-2-WORKSPACE_LOC/addons/ofxQNX/src/ofxQNXAccelerometer.cpp</locationURI>
-		</link>
-		<link>
-			<name>openFrameworks/ofxQNXSoundStream.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-2-WORKSPACE_LOC/addons/ofxQNX/src/ofxQNXSoundStream.cpp</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
