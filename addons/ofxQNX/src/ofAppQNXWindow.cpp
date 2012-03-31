@@ -40,6 +40,9 @@ Notes:
 #include "ofUtils.h"
 #include "ofxQNXApp.h"
 
+#include "ofxAccelerometer.h"
+#include <bps/sensor.h>
+
 static ofxQNXApp * qnxApp;
 
 ofAppQNXWindow::ofAppQNXWindow()
@@ -64,7 +67,7 @@ ofAppQNXWindow::ofAppQNXWindow()
 
 ofAppQNXWindow::~ofAppQNXWindow()
 {
-	// Not used
+
 }
 
 void ofAppQNXWindow::onTouchDown(unsigned int id, int x, int y, int pressure)
@@ -272,16 +275,34 @@ void ofAppQNXWindow::runAppLoop()
 			rc = bps_get_event(&event, 0);
 			assert(rc == BPS_SUCCESS);
 
-			if (event) {
+			if (event)
+			{
 				int domain = bps_event_get_domain(event);
-
-				if (domain == screen_get_domain()) {
+				if (domain == screen_get_domain())
+				{
 					qnxHandleScreenEvent(event);
-				} else if ((domain == navigator_get_domain())
-						&& (NAVIGATOR_EXIT == bps_event_get_code(event))) {
-					exit_application = 1;
 				}
-			} else {
+				else if ((domain == navigator_get_domain()) && (NAVIGATOR_EXIT == bps_event_get_code(event)))
+				{
+					exit_application = 1;
+					sensor_stop_events(SENSOR_TYPE_ACCELEROMETER);
+				}
+				else if (bps_event_get_domain(event) == sensor_get_domain())
+				{
+					if (SENSOR_ACCELEROMETER_READING == bps_event_get_code(event))
+					{
+						/*
+						 * Extract the accelerometer data from the event and
+						 * display it.
+						 */
+						sensor_event_get_xyz(event, &force_x, &force_y, &force_z);
+						//fprintf(stderr, "display_accelerometer_reading x%f y%f z%f\n", force_x, force_y, force_z);
+						ofxAccelerometer.update(-force_x, -force_y, -force_z); // inverted axis?
+					}
+				}
+			}
+			else
+			{
 				break;
 			}
 		}

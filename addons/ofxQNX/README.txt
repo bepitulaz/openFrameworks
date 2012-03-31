@@ -63,6 +63,7 @@ Open up eclipse and create a new workspace at:
 
 Next import: 
 - "openFrameworks\libs"
+- "openFrameworks\addons"
 - "openFrameworks\addons\ofxQNX"
 - The example projects under "openFrameworksPlayBook\examples\qnx"
 
@@ -101,7 +102,8 @@ NEWS
 TODO
 ====
 - Add more examples and instructions on how to compile the dependencies.
-
+- Recompile FreeImage
+- Check GLUES
 
 Examples
 ========
@@ -110,3 +112,4 @@ qnxGraphicsExample - basic graphics example
 qnxAudioOutputExample - play generated wave (broken atm)
 qnxPolygonExample - Shape A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
 qnxImageLoaderExample - jpg/gif works, need to fix png support (prob related to FreeImage?)
+qnxTouchExample - demonstrates how to use the accelerometer (and touch input)

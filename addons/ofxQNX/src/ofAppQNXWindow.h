@@ -103,7 +103,7 @@ class ofAppQNXWindow : public ofAppBaseWindow
 		screen_context_t screen_cxt;
 
 
-
+		float force_x, force_y, force_z;
 
 
 
