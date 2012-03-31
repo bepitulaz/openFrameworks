@@ -119,29 +119,35 @@ So there wont be a qnxCameraExample or qnxOpenCVExample until then.
 
 Examples
 ========
-qnxInputExample
-- Runs ok 
-- Demonstrates how to enable and use multitouch input in a project
-
-qnxGraphicsExample 
-- Runs ok 
-- Basic graphics example
 
 qnxAudioOutputExample 
 - Runs, but audio is messed up
 - Plays a generate waveform
 
+qnxEmptyExample
+- Runs ok
+- Use this as a template 
+- open up .cproject, .project and bar-descriptor.xml and replace the text "qnxEmptyExample" with "yourprojectname"
+
 qnxFontsExample
 - Runs but text is messed up
 - Example on how to use truetype fonts
 
-qnxPolygonExample 
-- Runs but shapes A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
-- Demonstrates how to draw an animated polygon
+qnxGraphicsExample 
+- Runs ok 
+- Basic graphics example
 
 qnxImageLoaderExample 
 - Runs fine for JPG and GIF, PNG files seem to be broken. (FreeImage issue?)
 - Demonstrates how to use image resources in openFrameworks
+
+qnxInputExample
+- Runs ok 
+- Demonstrates how to enable and use multitouch input in a project
+
+qnxPolygonExample 
+- Runs but shapes A B C E G H and I are broken. Issue with openFrameworks or perhaps GLU?
+- Demonstrates how to draw an animated polygon
 
 qnxTouchExample 
 - Runs ok
