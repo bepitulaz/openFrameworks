@@ -42,7 +42,7 @@ https://bdsc.webapps.blackberry.com/native/documentation/porting_overview_197089
 
 * FreeImage 
 - http://freeimage.sourceforge.net/
-- Using version 3.15.2 and removed support for TIFF and EXR to make it compile.
+- Using version 3.14.1 and removed support for EXR to make it compile.
 
 * GLU
 - Since no GLU is included with the Native SDK I am using the one from:
@@ -108,6 +108,9 @@ Next import:
 
 NEWS
 =======
+01/04/2012
+- Replaced freeimage with version 3.14.1 (This fixed the png issue with qnxImageLoaderExample)
+
 31/03/2012
 - Converted more examples to ofxQNX
 
@@ -120,15 +123,12 @@ TODO
 - Add more examples
 - Add instructions and patches required to compile the dependencies
 - Add GPS example
-- Include a more recent version of FreeImage (3.15.3?)
 - Include a more recent version of GLUES (1.4?)
 -- And maybe use GLUES's libtess instead of the one that is bundled with openFrameworks (tess2)
 - Add keyboard support (useful for qnxFontsExample example) 
 -- https://bdsc.webapps.blackberry.com/native/documentation/keyboard_using_1935244_11.html
 
 [Bugs]
-- Fix PNG loading issues (qnxImageLoaderExample)
--- Possibly related to FreeImage?
 - Fix font issues (qnxFontsExample)
 - Fix polygon winding issues (qnxPolygonExample)
 
@@ -140,7 +140,7 @@ So unfortunately there wont be a qnxCameraExample or qnxOpenCVExample until then
 Examples
 ========
 qnxAudioOutputExample 
-- Runs, but audio is messed up
+x Runs but audio is messed up
 - Plays a generate waveform, touch makes modifies the waveform and position (Left/Right)
 
 qnxEmptyExample
@@ -149,7 +149,7 @@ qnxEmptyExample
 - Open up .cproject, .project and bar-descriptor.xml and replace the text "qnxEmptyExample" with "yourprojectname"
 
 qnxFontsExample
-- Runs but text is messed up
+x Runs but text is messed up
 - Example on how to use truetype fonts
 
 qnxGraphicsExample 
@@ -157,7 +157,7 @@ qnxGraphicsExample
 - Basic graphics example
 
 qnxImageLoaderExample 
-- Runs fine for JPG and GIF but PNG file support seem to be broken. (FreeImage issue?)
+- Runs ok
 - Demonstrates how to use image resources in openFrameworks
 
 qnxInputExample
@@ -165,7 +165,7 @@ qnxInputExample
 - Demonstrates how to enable and use multitouch input in a project
 
 qnxPolygonExample 
-- Runs but shapes A B C E G H and I are broken. Issue with openFrameworks or perhaps GLUES?
+x Runs but shapes A B C E G H and I are broken. Issue with openFrameworks or perhaps GLUES?
 - Demonstrates how to draw (an animated) polygon
 
 qnxTouchExample 
