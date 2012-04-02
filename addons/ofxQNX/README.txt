@@ -53,6 +53,7 @@ https://bdsc.webapps.blackberry.com/native/documentation/porting_overview_197089
 
 * Tess 2
 - I am using the source files from "openFrameworks\libs\tess2\Sources"
+- In tesselator.h you will need to add: "|| defined(__QNX__)" to make sure it will select: "typedef unsigned short TESSindex;"
 - Compile the same way as GLU
 
 * Poco
@@ -120,17 +121,13 @@ NEWS
 
 TODO
 ====
-- Add more examples
 - Add instructions and patches required to compile the dependencies
 - Add GPS example
-- Include a more recent version of GLUES (1.4?)
--- And maybe use GLUES's libtess instead of the one that is bundled with openFrameworks (tess2)
 - Add keyboard support (useful for qnxFontsExample example) 
 -- https://bdsc.webapps.blackberry.com/native/documentation/keyboard_using_1935244_11.html
 
 [Bugs]
-- Fix font issues (qnxFontsExample)
-- Fix polygon winding issues (qnxPolygonExample)
+- Only the audio streamer...
 
 [Camera access]
 Currently the Native SDK doesnt provide access to the camera. More info about it here:
@@ -149,7 +146,7 @@ qnxEmptyExample
 - Open up .cproject, .project and bar-descriptor.xml and replace the text "qnxEmptyExample" with "yourprojectname"
 
 qnxFontsExample
-x Runs but text is messed up
+- Runs ok
 - Example on how to use truetype fonts
 
 qnxGraphicsExample 
@@ -165,7 +162,7 @@ qnxInputExample
 - Demonstrates how to enable and use multitouch input in a project
 
 qnxPolygonExample 
-x Runs but shapes A B C E G H and I are broken. Issue with openFrameworks or perhaps GLUES?
+- Runs ok
 - Demonstrates how to draw (an animated) polygon
 
 qnxTouchExample 
