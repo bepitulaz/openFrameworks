@@ -109,6 +109,12 @@ Next import:
 
 NEWS
 =======
+04/04/2012
+- Moved audio callback into its own thread (using ofThreads). Sound seems to be more stable, however its still noisy and seems to lag a bit.
+
+02/04/2012
+- Recompiled libtess2 with proper flags (this fixes the issues with qnxFontsExample and qnxPolygonExample)
+
 01/04/2012
 - Replaced freeimage with version 3.14.1 (This fixed the png issue with qnxImageLoaderExample)
 

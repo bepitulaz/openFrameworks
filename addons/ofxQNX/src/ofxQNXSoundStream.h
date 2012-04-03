@@ -38,7 +38,7 @@
 
 #include "ofMain.h"
 
-class ofxQNXSoundStream : public ofBaseSoundStream {
+class ofxQNXSoundStream : public ofBaseSoundStream, public ofThread {
 	public:
 		ofxQNXSoundStream();
 		virtual ~ofxQNXSoundStream();
@@ -62,8 +62,19 @@ class ofxQNXSoundStream : public ofBaseSoundStream {
 		int getNumOutputChannels();
 
 		int openQNXAudio();
-		void updateQNXAudio(ofEventArgs & args);
+		void updateQNXAudio();
 		void closeQNXAudio();
+
+		// audio thread
+		void threadedFunction() {
+			while( isThreadRunning() != 0 ){
+				//if( lock() ) {
+					updateQNXAudio();
+				//	unlock();
+					//ofSleepMillis(10);
+				//}
+			}
+		}
 
 	private:
 		long unsigned long	tickCount;

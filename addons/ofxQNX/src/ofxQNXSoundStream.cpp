@@ -246,15 +246,13 @@ int ofxQNXSoundStream::openQNXAudio(){
 	out_float_buffer = new float[bsize*nOutputChannels];
 	out_buffer = new short[bsize*nOutputChannels];
 
-	// (Ab)using the update event from openFrameworks for the callback.
-	// TODO: It's probably better to put this in a new thread and a while loop.
-	ofAddListener(ofEvents().update,this,&ofxQNXSoundStream::updateQNXAudio);
+	// Start audio thread
+	startThread(true, false); // blocking, not verbose
 }
 
 
 
-void ofxQNXSoundStream::updateQNXAudio(ofEventArgs & args) {
-	//fprintf(stderr, "ofxQNXSoundStream::updateQNXAudio\n");
+void ofxQNXSoundStream::updateQNXAudio() {
 
 	soundOutputPtr->audioOut(out_float_buffer, bsize, nOutputChannels);
 
@@ -264,11 +262,14 @@ void ofxQNXSoundStream::updateQNXAudio(ofEventArgs & args) {
 	}
 
 	int written = snd_pcm_plugin_write (pcm_handle, out_buffer, bsize);
-	fprintf(stderr, "written %d\n", written);	
+	//fprintf(stderr, "written %d\n", written);
 }
 
 void ofxQNXSoundStream::closeQNXAudio(){
 	fprintf(stderr, "ofxQNXSoundStream::closeQNXAudio\n");
+
+	// Start audio thread
+	stopThread();
 
 	snd_pcm_plugin_flush (pcm_handle, SND_PCM_CHANNEL_PLAYBACK);
 	snd_mixer_close (mixer_handle);
