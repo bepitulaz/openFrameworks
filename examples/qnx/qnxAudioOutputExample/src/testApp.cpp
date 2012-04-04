@@ -27,6 +27,16 @@ void testApp::setup(){
 	soundStream.setup(this, 2, 0, sampleRate, bufferSize, 4);
 
 	//ofSetFrameRate(60);
+
+	float x = 400;
+	float y = 200;
+
+	int width = ofGetWidth();
+	pan = (float)x / (float)width;
+	float height = (float)ofGetHeight();
+	float heightPct = ((height-y) / height);
+	targetFrequency = 2000.0f * heightPct;
+	phaseAdderTarget = (targetFrequency / (float) sampleRate) * TWO_PI;
 }
 
 
@@ -105,7 +115,7 @@ void testApp::draw(){
 }
 
 void testApp::touchDown(ofTouchEventArgs &touch) {
-	bNoise = true;
+	//bNoise = true;
 }
 
 void testApp::touchMoved(ofTouchEventArgs &touch) {
@@ -121,7 +131,7 @@ void testApp::touchMoved(ofTouchEventArgs &touch) {
 }
 
 void testApp::touchUp(ofTouchEventArgs &touch) {
-	bNoise = false;
+	//bNoise = false;
 }
 
 void testApp::touchDoubleTap(ofTouchEventArgs &touch){
@@ -194,6 +204,9 @@ void testApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void testApp::audioOut(float * output, int bufferSize, int nChannels){
+
+	//fprintf(stderr, "audioOut\n");
+
 	//pan = 0.5f;
 	float leftScale = 1 - pan;
 	float rightScale = pan;

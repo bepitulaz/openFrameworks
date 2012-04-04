@@ -32,107 +32,36 @@
 #include "ofMath.h"
 #include "ofUtils.h"
 
+#include <sys/asoundlib.h>
+
 #include "ofxQNXSoundStream.h"
+
+static int     bsize;
+
+//------------------------------------------------------------------------------
+static pthread_t thread;
+static void *playbackCallback(void *arg);
+
+static snd_pcm_t *pcm_handle;
+static snd_mixer_t *mixer_handle;
+
+static int nInputChannels;
+static int nOutputChannels;
+static int sampleRate;
+static int bufferSize;
+
+static float * out_float_buffer	= NULL;
+static short * out_buffer		= NULL;
 
 static bool							isSetup			= false;
 static bool							isRunning		= false;
 static ofBaseSoundInput *			soundInputPtr	= NULL;
 static ofBaseSoundOutput *			soundOutputPtr	= NULL;
 
-ofxQNXSoundStream::ofxQNXSoundStream()
-{
-	fprintf(stderr, "ofxQNXSoundStream::ofxQNXSoundStream()\n");
-}
-
-ofxQNXSoundStream::~ofxQNXSoundStream()
-{
-	fprintf(stderr, "ofxQNXSoundStream::~ofxQNXSoundStream()\n");
-}
-
-void ofxQNXSoundStream::listDevices()
-{
-	fprintf(stderr, "ofxQNXSoundStream::listDevices()\n");
-}
-void ofxQNXSoundStream::setDeviceID(int deviceID)
-{
-	fprintf(stderr, "ofxQNXSoundStream::setDeviceID()\n");
-}
-
-void ofxQNXSoundStream::setInput(ofBaseSoundInput * soundInput)
-{
-	fprintf(stderr, "ofxQNXSoundStream::setInput(ofBaseSoundInput)\n");
-	soundInputPtr = soundInput;
-}
-void ofxQNXSoundStream::setOutput(ofBaseSoundOutput * soundOutput)
-{
-	fprintf(stderr, "ofxQNXSoundStream::setInput(ofBaseSoundOutput)\n");
-	soundOutputPtr = soundOutput;
-}
-
-bool ofxQNXSoundStream::setup(int outChannels, int inChannels, int _sampleRate, int bufferSize, int nBuffers)
-{
-	fprintf(stderr, "ofxQNXSoundStream::setup(outChannels %d, inChannels %d, sampleRate %d, bufferSize %d, nBuffers %d)\n", outChannels, inChannels, _sampleRate, bufferSize, nBuffers);
-
-	nInputChannels = inChannels;
-	nOutputChannels = outChannels;
-	tickCount = 0;
-	sampleRate = _sampleRate;
-
-	nBuffers = 1;
-
-	// Setup QNX
-	openQNXAudio();
-
-	if(isRunning) {
-		stop();
-		close();
-	}
-
-	isSetup = true;
-	ofSoundStreamStart();
-}
-bool ofxQNXSoundStream::setup(ofBaseApp * app, int outChannels, int inChannels, int sampleRate, int bufferSize, int nBuffers)
-{
-	fprintf(stderr, "ofxQNXSoundStream::setup(ofBaseApp)\n");
-	setInput(app);
-	setOutput(app);
-	setup(outChannels, inChannels, sampleRate, bufferSize, nBuffers);
-}
-
-void ofxQNXSoundStream::start()
-{
-	fprintf(stderr, "ofxQNXSoundStream::start\n");
-	// TODO
-	if(isRunning)
-		ofSoundStreamStop();
-}
-void ofxQNXSoundStream::stop()
-{
-	fprintf(stderr, "ofxQNXSoundStream::stop\n");
-	// TODO
-}
-void ofxQNXSoundStream::close()
-{
-	fprintf(stderr, "ofxQNXSoundStream::close\n");
-	// TODO
-}
-
-long unsigned long ofxQNXSoundStream::getTickCount()
-{
-	fprintf(stderr, "ofxQNXSoundStream::getTickCount\n");
-	return tickCount;
-}
 //------------------------------------------------------------------------------
-int ofxQNXSoundStream::getNumInputChannels(){
-	return nInputChannels;
-}
 
-//------------------------------------------------------------------------------
-int ofxQNXSoundStream::getNumOutputChannels(){
-	return nOutputChannels;
-}
-
-int ofxQNXSoundStream::openQNXAudio(){
+static int openQNXAudio()
+{
 	fprintf(stderr, "ofxQNXSoundStream::openQNXAudio\n");
 
 	int     rtn;
@@ -144,9 +73,11 @@ int ofxQNXSoundStream::openQNXAudio(){
 	snd_mixer_group_t group;
 	snd_pcm_channel_setup_t setup;
 
+	// Change?
+	//#define FRAGNUM 16
+	//#define FRAGSIZE 1024
 	int     fragsize = -1;
 	int     num_frags = -1;
-
 
 // Open PCM
 	if ((rtn = snd_pcm_open_preferred (&pcm_handle, &card, &dev, SND_PCM_OPEN_PLAYBACK)) < 0)
@@ -157,7 +88,6 @@ int ofxQNXSoundStream::openQNXAudio(){
 
 // disabling mmap is not actually required in this example but it is included to
 // demonstrate how it is used when it is required.
-
 	if ((rtn = snd_pcm_plugin_set_disable (pcm_handle, PLUGIN_DISABLE_MMAP)) < 0)
 	{
 		fprintf(stderr, "snd_pcm_plugin_set_disable failed: %s\n", snd_strerror (rtn));
@@ -179,7 +109,7 @@ int ofxQNXSoundStream::openQNXAudio(){
 	pp.channel = SND_PCM_CHANNEL_PLAYBACK;
 	pp.start_mode = SND_PCM_START_FULL;
 	pp.stop_mode = SND_PCM_STOP_STOP;
-	pp.buf.block.frag_size = pi.max_fragment_size;
+	pp.buf.block.frag_size = pi.max_fragment_size;	// bufferSize; // use value set by user instead of what snd_pcm_plugin_info() reports?
 
 	if (fragsize != -1)
 	{
@@ -235,43 +165,138 @@ int ofxQNXSoundStream::openQNXAudio(){
 	fprintf(stderr, "Voices %d \n", setup.format.voices);
 	fprintf(stderr, "Mixer Pcm Group [%s]\n", group.gid.name);
 
-
+	// final buffer size
 	bsize = setup.buf.block.frag_size;
-	//pcm_buf = malloc (bsize);
-	// Still need to allocate PCM_BUFFER
 
-	out_buffer = NULL;
-	out_float_buffer = NULL;
-
-	out_float_buffer = new float[bsize*nOutputChannels];
-	out_buffer = new short[bsize*nOutputChannels];
+	out_float_buffer = new float[bsize * nOutputChannels];
+	out_buffer = new short[bsize * nOutputChannels];
 
 	// Start audio thread
-	startThread(true, false); // blocking, not verbose
+	pthread_create (&thread, NULL, playbackCallback, NULL);
+	pthread_detach (thread);
+
+	return 0;
 }
 
-
-
-void ofxQNXSoundStream::updateQNXAudio() {
+static void updateQNXAudio() {
 
 	soundOutputPtr->audioOut(out_float_buffer, bsize, nOutputChannels);
 
 	for(int i=0;i<bsize*nOutputChannels ;i++){
 		float tempf = (out_float_buffer[i] * 32767.5f) - 0.5f;
-		out_buffer[i] = tempf;//lrintf( tempf - 0.5 );
+		out_buffer[i] = tempf;
 	}
 
 	int written = snd_pcm_plugin_write (pcm_handle, out_buffer, bsize);
 	//fprintf(stderr, "written %d\n", written);
 }
 
-void ofxQNXSoundStream::closeQNXAudio(){
+static void closeQNXAudio() {
 	fprintf(stderr, "ofxQNXSoundStream::closeQNXAudio\n");
-
-	// Start audio thread
-	stopThread();
 
 	snd_pcm_plugin_flush (pcm_handle, SND_PCM_CHANNEL_PLAYBACK);
 	snd_mixer_close (mixer_handle);
 	snd_pcm_close (pcm_handle);
+}
+
+static void *playbackCallback(void *arg)
+{
+	while(true) {
+		updateQNXAudio();
+	}
+
+	return 0;
+}
+
+//------------------------------------------------------------------------------
+
+ofxQNXSoundStream::ofxQNXSoundStream()
+{
+	fprintf(stderr, "ofxQNXSoundStream::ofxQNXSoundStream()\n");
+}
+
+ofxQNXSoundStream::~ofxQNXSoundStream()
+{
+	fprintf(stderr, "ofxQNXSoundStream::~ofxQNXSoundStream()\n");
+	//closeQNXAudio(); // causes segfault
+}
+
+void ofxQNXSoundStream::setInput(ofBaseSoundInput * soundInput)
+{
+	fprintf(stderr, "ofxQNXSoundStream::setInput(ofBaseSoundInput)\n");
+	soundInputPtr = soundInput;
+}
+
+void ofxQNXSoundStream::setOutput(ofBaseSoundOutput * soundOutput)
+{
+	fprintf(stderr, "ofxQNXSoundStream::setInput(ofBaseSoundOutput)\n");
+	soundOutputPtr = soundOutput;
+}
+
+bool ofxQNXSoundStream::setup(int outChannels, int inChannels, int _sampleRate, int _bufferSize, int nBuffers)
+{
+	fprintf(stderr, "ofxQNXSoundStream::setup(outChannels %d, inChannels %d, sampleRate %d, bufferSize %d, nBuffers %d)\n", outChannels, inChannels, _sampleRate, bufferSize, nBuffers);
+
+	nInputChannels = inChannels;
+	nOutputChannels = outChannels;
+	tickCount = 0;
+	sampleRate = _sampleRate;
+	bufferSize = _bufferSize;
+
+	// not used.
+	nBuffers = 1;
+
+	// Setup QNX
+	openQNXAudio();
+
+	if(isRunning) {
+		stop();
+		close();
+	}
+
+	isSetup = true;
+	ofSoundStreamStart();
+
+	return true;
+}
+
+bool ofxQNXSoundStream::setup(ofBaseApp * app, int outChannels, int inChannels, int sampleRate, int bufferSize, int nBuffers)
+{
+	fprintf(stderr, "ofxQNXSoundStream::setup(ofBaseApp)\n");
+	setInput(app);
+	setOutput(app);
+	return setup(outChannels, inChannels, sampleRate, bufferSize, nBuffers);
+}
+
+void ofxQNXSoundStream::start()
+{
+	fprintf(stderr, "ofxQNXSoundStream::start\n");
+	// TODO
+	if(isRunning)
+		ofSoundStreamStop();
+}
+
+void ofxQNXSoundStream::stop()
+{
+	fprintf(stderr, "ofxQNXSoundStream::stop\n");
+	// TODO
+}
+
+void ofxQNXSoundStream::close()
+{
+	fprintf(stderr, "ofxQNXSoundStream::close\n");
+	// TODO
+}
+
+long unsigned long ofxQNXSoundStream::getTickCount()
+{
+	return tickCount;
+}
+
+int ofxQNXSoundStream::getNumInputChannels(){
+	return nInputChannels;
+}
+
+int ofxQNXSoundStream::getNumOutputChannels(){
+	return nOutputChannels;
 }

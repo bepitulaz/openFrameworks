@@ -34,17 +34,15 @@
 #include "ofConstants.h"
 #include "ofBaseSoundStream.h"
 #include "ofTypes.h"
-#include <sys/asoundlib.h>
 
-#include "ofMain.h"
-
-class ofxQNXSoundStream : public ofBaseSoundStream, public ofThread {
+class ofxQNXSoundStream : public ofBaseSoundStream {
 	public:
 		ofxQNXSoundStream();
 		virtual ~ofxQNXSoundStream();
 
-		void listDevices();
-		void setDeviceID(int deviceID);
+		// these are not implemented on QNX
+		void listDevices() {};
+		void setDeviceID(int deviceID) {};
 
 		bool setup(int outChannels, int inChannels, int sampleRate, int bufferSize, int nBuffers);
 		bool setup(ofBaseApp * app, int outChannels, int inChannels, int sampleRate, int bufferSize, int nBuffers);
@@ -56,39 +54,19 @@ class ofxQNXSoundStream : public ofBaseSoundStream, public ofThread {
 		void stop();
 		void close();
 
+		// not implemented on QNX, always returns 0
 		long unsigned long getTickCount();
 
 		int getNumInputChannels();
 		int getNumOutputChannels();
 
+		/*
 		int openQNXAudio();
 		void updateQNXAudio();
 		void closeQNXAudio();
-
-		// audio thread
-		void threadedFunction() {
-			while( isThreadRunning() != 0 ){
-				//if( lock() ) {
-					updateQNXAudio();
-				//	unlock();
-					//ofSleepMillis(10);
-				//}
-			}
-		}
-
+*/
 	private:
 		long unsigned long	tickCount;
-		int					nInputChannels;
-		int					nOutputChannels;
-		int					sampleRate;
-
-		// Playbook specific
-		snd_pcm_t *pcm_handle;
-		snd_mixer_t *mixer_handle;
-
-		float * out_float_buffer;
-		short * out_buffer;
-		int     bsize;
 };
 
 #endif /* OFXQNXSOUNDSTREAM_H_ */
