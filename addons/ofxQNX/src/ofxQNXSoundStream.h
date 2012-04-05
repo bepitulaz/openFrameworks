@@ -60,11 +60,6 @@ class ofxQNXSoundStream : public ofBaseSoundStream {
 		int getNumInputChannels();
 		int getNumOutputChannels();
 
-		/*
-		int openQNXAudio();
-		void updateQNXAudio();
-		void closeQNXAudio();
-*/
 	private:
 		long unsigned long	tickCount;
 };
