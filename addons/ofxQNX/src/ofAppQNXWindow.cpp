@@ -63,6 +63,8 @@ ofAppQNXWindow::ofAppQNXWindow()
 	onesec = 0;
 	bFrameRateSet = false;
 	oneFrameTime = 0;
+
+	mousePressed = false;
 }
 
 ofAppQNXWindow::~ofAppQNXWindow()
@@ -350,10 +352,29 @@ void ofAppQNXWindow::qnxHandleScreenEvent(bps_event_t *event)
 		// Handle a mouse event here (simulator only)
 		int buttons;
 		int pair[2];
-
 		screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_BUTTONS, &buttons);
 		screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_SOURCE_POSITION, pair);
-		onTouchMove(0, pair[0], pair[1], 0);
+
+		if(!mousePressed)
+		{
+			if(buttons == 1)
+			{
+				onTouchDown(0, pair[0], pair[1], 0);
+				mousePressed = true;
+			}
+		}
+		else
+		{
+			if(buttons == 1)
+			{
+				onTouchMove(0, pair[0], pair[1], 0);
+			}
+			else if(buttons == 0)
+			{
+				onTouchUp(0, pair[0], pair[1], 0);
+				mousePressed = false;
+			}
+		}
 	}
 }
 

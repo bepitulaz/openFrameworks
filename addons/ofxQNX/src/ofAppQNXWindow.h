@@ -105,8 +105,7 @@ class ofAppQNXWindow : public ofAppBaseWindow
 
 		float force_x, force_y, force_z;
 
-
-
+		bool mousePressed;
 
 		int		nFrameCount;
 		float	frameRate;
