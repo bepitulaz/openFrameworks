@@ -307,10 +307,36 @@
 								<option id="com.qnx.qcc.option.compiler.includePath.6241023" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/addons/ofxAccelerometer/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/boost/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/FreeImage/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/glu/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/poco/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/tess2/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/cairo/include/cairo}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/3d}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/app}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/events}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/gl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/graphics}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/math}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/sound}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/types}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/utils}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/libs/openFrameworks/video}&quot;"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.security.2021562378" name="Enhanced Security (-fstack-protector-all)" superClass="com.qnx.qcc.option.compiler.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.defines.239518686" name="Defines (-D)" superClass="com.qnx.qcc.option.compiler.defines" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
+									<listOptionValue builtIn="false" value="USING_GL11"/>
+									<listOptionValue builtIn="false" value="TARGET_QNX"/>
+									<listOptionValue builtIn="false" value="TARGET_OPENGLES"/>
+									<listOptionValue builtIn="false" value="TARGET_LITTLE_ENDIAN"/>
+								</option>
+								<option id="com.qnx.qcc.option.compiler.qccoptions.1443645180" superClass="com.qnx.qcc.option.compiler.qccoptions" valueType="stringList">
+									<listOptionValue builtIn="false" value="-m32 -march=i486"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.compiler.400030489" superClass="com.qnx.qcc.inputType.compiler"/>
 							</tool>
@@ -324,8 +350,29 @@
 								<option id="com.qnx.qcc.option.linker.libraryPaths.968582280" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/FreeImage/lib/Simulator-Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/glu/lib/Simulator-Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/poco/lib/Simulator-Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/tess2/lib/Simulator-Debug}&quot;"/>
 								</option>
 								<option id="com.qnx.qcc.option.linker.security.205514453" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
+								<option id="com.qnx.qcc.option.linker.libraries.170116069" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
+									<listOptionValue builtIn="false" value="bps"/>
+									<listOptionValue builtIn="false" value="screen"/>
+									<listOptionValue builtIn="false" value="EGL"/>
+									<listOptionValue builtIn="false" value="GLESv1_CM"/>
+									<listOptionValue builtIn="false" value="freetype"/>
+									<listOptionValue builtIn="false" value="png"/>
+									<listOptionValue builtIn="false" value="socket"/>
+									<listOptionValue builtIn="false" value="PocoNet"/>
+									<listOptionValue builtIn="false" value="PocoUtil"/>
+									<listOptionValue builtIn="false" value="PocoXML"/>
+									<listOptionValue builtIn="false" value="PocoFoundation"/>
+									<listOptionValue builtIn="false" value="freeimage"/>
+									<listOptionValue builtIn="false" value="tess2"/>
+									<listOptionValue builtIn="false" value="GLU"/>
+									<listOptionValue builtIn="false" value="asound"/>
+								</option>
 								<inputType id="com.qnx.qcc.inputType.linker.1079640654" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

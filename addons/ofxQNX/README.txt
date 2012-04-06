@@ -61,6 +61,8 @@ https://bdsc.webapps.blackberry.com/native/documentation/porting_overview_197089
 - Version 1.4.3
 - This can only be compiled on a linux machine. Included files are compiled on Ubuntu Linux 11.10
 - To generate the makefiles: ./configure --config=QNX --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix=/home/falcon4ever/pocoplaybook
+- You might need a bogus syslog.h (borrow from the Android NDK?)
+- For the x86 build, add these extra flags: -m32 -march=i486
 - Modify the QNX config as posted here: http://pocoproject.org/forum/viewtopic.php?f=12&t=5318
 - Now you should be able to build it.
 - Linker flags: -lPocoNet -lPocoUtil -lPocoXML -lPocoFoundation -lsocket
@@ -78,6 +80,7 @@ Next import:
 - "openFrameworks\addons"
 - "openFrameworks\addons\ofxQNX"
 - The example projects under "openFrameworksPlayBook\examples\qnx"
+
 
 [Project settings]
 (these are already set in the example projects)
@@ -109,6 +112,10 @@ Next import:
 
 NEWS
 =======
+06/04/2012
+- Added x86 binaries for use with the simulator
+- Updated example project config files for the simulator (Set the project to Simulator-Debug)
+
 04/04/2012
 - Moved audio callback into its own thread (using ofThreads). Sound seems to be more stable, however its still noisy and seems to lag a bit.
 
