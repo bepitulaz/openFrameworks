@@ -13,7 +13,7 @@ void testApp::setup(){
 	// 512 samples per buffer
 	// 4 num buffers (latency)
 	
-	int bufferSize		= 2820; // would prefer 512...;
+	int bufferSize		= 4096; // would prefer 512...;
 	sampleRate 			= 44100;
 	phase 				= 0;
 	phaseAdder 			= 0.0f;

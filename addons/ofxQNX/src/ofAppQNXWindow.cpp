@@ -345,6 +345,16 @@ void ofAppQNXWindow::qnxHandleScreenEvent(bps_event_t *event)
 		touch_id = mtouch_event.contact_id;
 		onTouchUp(touch_id, mtouch_event.x, mtouch_event.y, mtouch_event.pressure);
 	}
+    else if (screen_val == SCREEN_EVENT_POINTER)
+	{
+		// Handle a mouse event here (simulator only)
+		int buttons;
+		int pair[2];
+
+		screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_BUTTONS, &buttons);
+		screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_SOURCE_POSITION, pair);
+		onTouchMove(0, pair[0], pair[1], 0);
+	}
 }
 
 /*
