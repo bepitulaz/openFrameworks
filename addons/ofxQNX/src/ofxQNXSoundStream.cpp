@@ -115,7 +115,7 @@ static int openQNXAudio()
 	{
 		pp.buf.block.frag_size = fragsize;
 	}
-	pp.buf.block.frags_max = num_frags;
+	pp.buf.block.frags_max = 4; // setting this to 4 seems to lower the latency, 3 also works in simulator but might stop after a bit  // num_frags;
 	pp.buf.block.frags_min = 1;
 
 	pp.format.interleave = 1;
@@ -235,7 +235,7 @@ void ofxQNXSoundStream::setOutput(ofBaseSoundOutput * soundOutput)
 
 bool ofxQNXSoundStream::setup(int outChannels, int inChannels, int _sampleRate, int _bufferSize, int nBuffers)
 {
-	fprintf(stderr, "ofxQNXSoundStream::setup(outChannels %d, inChannels %d, sampleRate %d, bufferSize %d, nBuffers %d)\n", outChannels, inChannels, _sampleRate, bufferSize, nBuffers);
+	fprintf(stderr, "ofxQNXSoundStream::setup(outChannels %d, inChannels %d, sampleRate %d, bufferSize %d, nBuffers %d)\n", outChannels, inChannels, _sampleRate, _bufferSize, nBuffers);
 
 	nInputChannels = inChannels;
 	nOutputChannels = outChannels;
