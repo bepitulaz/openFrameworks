@@ -115,7 +115,7 @@ static int openQNXAudio()
 	{
 		pp.buf.block.frag_size = fragsize;
 	}
-	pp.buf.block.frags_max = 4; // setting this to 4 seems to lower the latency, 3 also works in simulator but might stop after a bit  // num_frags;
+	pp.buf.block.frags_max = 6; // setting this to 4 seems to lower the latency, if value doesnt works, increase it  // num_frags;
 	pp.buf.block.frags_min = 1;
 
 	pp.format.interleave = 1;

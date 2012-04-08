@@ -138,9 +138,11 @@ TODO
 - Add GPS example
 - Add keyboard support (useful for qnxFontsExample example) 
 -- https://bdsc.webapps.blackberry.com/native/documentation/keyboard_using_1935244_11.html
+- Implement ofxQNXSoundPlayer class (or try to use ofOpenALSoundPlayer)
 
 [Bugs]
 - Only the audio streamer...
+-- Improved a bit when setting a low value for buf.block.frags_max
 
 [Camera access]
 Currently the Native SDK doesnt provide access to the camera. More info about it here:
@@ -173,6 +175,10 @@ qnxImageLoaderExample
 qnxInputExample
 - Runs ok 
 - Demonstrates how to enable and use multitouch input in a project
+
+qnxSoundPlayerExample
+- No audio, ofxQNXSoundPlayer.h not implemented.
+- Demonstrates how to play audio files
 
 qnxPolygonExample 
 - Runs ok
