@@ -35,6 +35,9 @@
 #include "ofBaseSoundStream.h"
 #include "ofTypes.h"
 
+#include "SDL.h"
+#include "SDL_main.h"
+
 class ofxQNXSoundStream : public ofBaseSoundStream {
 	public:
 		ofxQNXSoundStream();
@@ -62,6 +65,9 @@ class ofxQNXSoundStream : public ofBaseSoundStream {
 
 	private:
 		long unsigned long	tickCount;
+
+	    static void AudioCallback(void *data, uint8_t *stream, int length);
+	    int openQNXAudio();
 };
 
 #endif /* OFXQNXSOUNDSTREAM_H_ */

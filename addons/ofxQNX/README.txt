@@ -67,6 +67,13 @@ https://bdsc.webapps.blackberry.com/native/documentation/porting_overview_197089
 - Now you should be able to build it.
 - Linker flags: -lPocoNet -lPocoUtil -lPocoXML -lPocoFoundation -lsocket
 
+* SDL
+- Add __PLAYBOOK__ to your project if you use Audio/SDL
+- https://github.com/blackberry/SDL
+
+* TouchControlOverlay
+- https://github.com/blackberry/TouchControlOverlay
+
 Additional information can be found here:
 http://forum.openframeworks.cc/index.php/topic,9189.msg42786.html#msg42786
 
@@ -91,6 +98,7 @@ Next import:
 - TARGET_QNX
 - TARGET_OPENGLES
 - TARGET_LITTLE_ENDIAN
+- __PLAYBOOK__
 
 * Libraries (-l)
 - bps
@@ -112,6 +120,9 @@ Next import:
 
 NEWS
 =======
+10/04/2012
+- ofxQNXSoundStream is now using SDL instead of QSA. Seems to be providing low latency audio without distortions.
+
 06/04/2012
 - Added x86 binaries for use with the simulator
 - Updated example project config files for the simulator (Set the project to Simulator-Debug)
@@ -141,8 +152,7 @@ TODO
 - Implement ofxQNXSoundPlayer class (or try to use ofOpenALSoundPlayer)
 
 [Bugs]
-- Only the audio streamer...
--- Improved a bit when setting a low value for buf.block.frags_max
+- please report ;)
 
 [Camera access]
 Currently the Native SDK doesnt provide access to the camera. More info about it here:
@@ -152,7 +162,7 @@ So unfortunately there wont be a qnxCameraExample or qnxOpenCVExample until then
 Examples
 ========
 qnxAudioOutputExample 
-x Runs but audio is messed up
+- Runs ok
 - Plays a generate waveform, touch makes modifies the waveform and position (Left/Right)
 
 qnxEmptyExample
