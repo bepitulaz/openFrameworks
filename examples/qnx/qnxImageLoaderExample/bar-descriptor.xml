@@ -56,6 +56,8 @@
     <configuration id="com.qnx.qcc.configuration.exe.debug.2136424254" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/qnxImageLoaderExample" entry="true" type="Qnx/Elf">qnxImageLoaderExample</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/lib/Device-Debug/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/lib/Device-Debug/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.release.2096755720" name="Device-Release">
        <platformArchitecture>armle-v7</platformArchitecture>
@@ -72,6 +74,8 @@
     <configuration id="com.qnx.qcc.configuration.exe.debug.886947137" name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
        <asset path="Simulator-Debug/qnxImageLoaderExample" entry="true" type="Qnx/Elf">qnxImageLoaderExample</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/lib/Simulator-Debug/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/lib/Simulator/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.profile.854364533" name="Simulator-Profile">
        <platformArchitecture>x86</platformArchitecture>

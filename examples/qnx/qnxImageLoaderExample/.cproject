@@ -24,6 +24,7 @@
 								<option id="com.qnx.qcc.option.compiler.optlevel.1784744940" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
 								<option id="com.qnx.qcc.option.compile.debug.177388976" name="Debug (-g)" superClass="com.qnx.qcc.option.compile.debug" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.includePath.571580738" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/SDL/include}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/addons/ofxAccelerometer/src}&quot;"/>
@@ -53,6 +54,7 @@
 									<listOptionValue builtIn="false" value="TARGET_QNX"/>
 									<listOptionValue builtIn="false" value="TARGET_OPENGLES"/>
 									<listOptionValue builtIn="false" value="TARGET_LITTLE_ENDIAN"/>
+									<listOptionValue builtIn="false" value="__PLAYBOOK__"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.compiler.614069098" superClass="com.qnx.qcc.inputType.compiler"/>
 							</tool>
@@ -70,6 +72,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/glu/lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/poco/lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/tess2/lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/SDL/lib/Device-Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/TouchControlOverlay/lib/Device-Debug}&quot;"/>
 								</option>
 								<option id="com.qnx.qcc.option.linker.security.832912397" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.19081386" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
@@ -88,6 +92,8 @@
 									<listOptionValue builtIn="false" value="tess2"/>
 									<listOptionValue builtIn="false" value="GLU"/>
 									<listOptionValue builtIn="false" value="asound"/>
+									<listOptionValue builtIn="false" value="SDL12"/>
+									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.linker.1703599789" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -305,6 +311,7 @@
 								<option id="com.qnx.qcc.option.compiler.optlevel.1681472472" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
 								<option id="com.qnx.qcc.option.compile.debug.2113768600" name="Debug (-g)" superClass="com.qnx.qcc.option.compile.debug" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.includePath.6241023" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/SDL/include}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/usr/include/freetype2"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/usr/include"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/addons/ofxAccelerometer/src}&quot;"/>
@@ -334,6 +341,7 @@
 									<listOptionValue builtIn="false" value="TARGET_QNX"/>
 									<listOptionValue builtIn="false" value="TARGET_OPENGLES"/>
 									<listOptionValue builtIn="false" value="TARGET_LITTLE_ENDIAN"/>
+									<listOptionValue builtIn="false" value="__PLAYBOOK__"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.qccoptions.1443645180" superClass="com.qnx.qcc.option.compiler.qccoptions" valueType="stringList">
 									<listOptionValue builtIn="false" value="-m32 -march=i486"/>
@@ -354,6 +362,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/glu/lib/Simulator-Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/poco/lib/Simulator-Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/tess2/lib/Simulator-Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/SDL/lib/Simulator-Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ofxQNX/libs/TouchControlOverlay/lib/Simulator}&quot;"/>
 								</option>
 								<option id="com.qnx.qcc.option.linker.security.205514453" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraries.170116069" name="Libraries (-l)" superClass="com.qnx.qcc.option.linker.libraries" valueType="libs">
@@ -372,6 +382,8 @@
 									<listOptionValue builtIn="false" value="tess2"/>
 									<listOptionValue builtIn="false" value="GLU"/>
 									<listOptionValue builtIn="false" value="asound"/>
+									<listOptionValue builtIn="false" value="SDL12"/>
+									<listOptionValue builtIn="false" value="TouchControlOverlay"/>
 								</option>
 								<inputType id="com.qnx.qcc.inputType.linker.1079640654" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
