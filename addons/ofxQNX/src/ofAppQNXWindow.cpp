@@ -43,6 +43,9 @@ Notes:
 #include "ofxAccelerometer.h"
 #include <bps/sensor.h>
 
+#define DOUBLE_TAP_RANGE 10
+#define DOUBLE_TAP_TIME 300
+
 static ofxQNXApp * qnxApp;
 
 ofAppQNXWindow::ofAppQNXWindow()
@@ -82,8 +85,53 @@ void ofAppQNXWindow::onTouchDown(unsigned int id, int x, int y, int pressure)
 	touch.y = y;
 	touch.pressure = pressure;
 	touch.type = ofTouchEventArgs::down;
-
+	touch.time = ofGetElapsedTimeMillis();
 	ofNotifyEvent(ofEvents().touchDown, touch);
+
+	// check for doubletap event
+	{
+		// Compare position and last touch
+		int found = -1;
+		for (unsigned int i = 0; i < touchList.size(); ++i)
+		{
+			if(	abs(touchList[i].x - touch.x) < DOUBLE_TAP_RANGE &&
+				abs(touchList[i].y - touch.y) < DOUBLE_TAP_RANGE &&
+				(touch.time - touchList[i].time) < DOUBLE_TAP_TIME
+			  )
+			{
+				found = i;
+				touchList.erase (touchList.begin() + found);
+				break;
+			}
+		}
+
+		// Not found, add touch to history
+		if(found == -1)
+		{
+			touchList.push_back (touch);
+		}		else
+		{
+			// Prepare to trigger doubleTap event
+			ofTouchEventArgs touch2;
+			touch2.id = touch.id;
+			touch2.x = touch.x;
+			touch2.y = touch.y;
+			touch2.pressure = touch.pressure;
+			touch2.type = ofTouchEventArgs::doubleTap;
+			touch2.time = touch.time;
+			ofNotifyEvent(ofEvents().touchDoubleTap, touch2);
+		}
+
+		// Clean up old touches
+		if(!touchList.empty())
+			for (int j = touchList.size() - 1; j >= 0; --j)
+			{
+				if((touch.time - touchList[j].time) > DOUBLE_TAP_TIME)
+				{
+					touchList.erase (touchList.begin() + j);
+				}
+			}
+	}
 }
 
 void ofAppQNXWindow::onTouchMove(unsigned int id, int x, int y, int pressure)
@@ -97,7 +145,7 @@ void ofAppQNXWindow::onTouchMove(unsigned int id, int x, int y, int pressure)
 	touch.y = y;
 	touch.pressure = pressure;
 	touch.type = ofTouchEventArgs::move;
-
+	touch.time = ofGetElapsedTimeMillis();
 	ofNotifyEvent(ofEvents().touchMoved, touch);
 }
 
@@ -111,7 +159,7 @@ void ofAppQNXWindow::onTouchUp(unsigned int id, int x, int y, int pressure)
 	touch.y = y;
 	touch.pressure = pressure;
 	touch.type = ofTouchEventArgs::up;
-
+	touch.time = ofGetElapsedTimeMillis();
 	ofNotifyEvent(ofEvents().touchUp, touch);
 }
 
@@ -221,7 +269,7 @@ void ofAppQNXWindow::setOrientation(ofOrientation _orientation)
 ofOrientation ofAppQNXWindow::getOrientation()
 {
 	// TODO
-	return OF_ORIENTATION_DEFAULT;
+	return orientation;
 }
 
 int	ofAppQNXWindow::getWidth()

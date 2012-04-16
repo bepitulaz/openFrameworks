@@ -43,6 +43,8 @@
 #include <bps/event.h>
 #include "bbutil.h"
 
+#include "ofEvents.h"
+
 class ofAppQNXWindow : public ofAppBaseWindow 
 {
 	public:
@@ -102,6 +104,7 @@ class ofAppQNXWindow : public ofAppBaseWindow
 		int exit_application;
 		screen_context_t screen_cxt;
 
+		std::vector<ofTouchEventArgs> touchList;
 
 		float force_x, force_y, force_z;
 
