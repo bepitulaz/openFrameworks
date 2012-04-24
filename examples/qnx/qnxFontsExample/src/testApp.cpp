@@ -29,7 +29,6 @@ void testApp::setup(){
 
 	bFirst  = true;
 	typeStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789,:&!?";
-
 }
 
 //--------------------------------------------------------------
@@ -41,7 +40,7 @@ void testApp::update(){
 void testApp::draw(){
 	
 	ofSetColor(225);
-	verdana14.drawString("Font Example - use keyboard to type", 30, 35);
+	verdana14.drawString("Font Example - use keyboard to type\n(Perform a downward swipe gesture from the top of the device screen to open the keyboard)", 30, 35);
 
 	ofSetColor(245, 58, 135);
 	verdana14.drawString("anti aliased", 145, 92);

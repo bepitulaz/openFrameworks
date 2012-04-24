@@ -42,6 +42,8 @@
 #include <bps/bps.h>
 #include <bps/event.h>
 #include "bbutil.h"
+#include <bps/virtualkeyboard.h>
+#include <sys/keycodes.h>
 
 #include "ofEvents.h"
 

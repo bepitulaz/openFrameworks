@@ -332,6 +332,10 @@ void ofAppQNXWindow::runAppLoop()
 				{
 					qnxHandleScreenEvent(event);
 				}
+				else if ((domain == navigator_get_domain()) && (NAVIGATOR_SWIPE_DOWN == bps_event_get_code(event)))
+				{
+					virtualkeyboard_show();
+				}
 				else if ((domain == navigator_get_domain()) && (NAVIGATOR_EXIT == bps_event_get_code(event)))
 				{
 					exit_application = 1;
@@ -371,8 +375,7 @@ void ofAppQNXWindow::qnxHandleScreenEvent(bps_event_t *event)
     int touch_id;
 
     int screen_val;
-    screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_TYPE,
-            &screen_val);
+    screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_TYPE, &screen_val);
 
     if (screen_val == SCREEN_EVENT_MTOUCH_TOUCH)
     {
@@ -395,6 +398,49 @@ void ofAppQNXWindow::qnxHandleScreenEvent(bps_event_t *event)
 		touch_id = mtouch_event.contact_id;
 		onTouchUp(touch_id, mtouch_event.x, mtouch_event.y, mtouch_event.pressure);
 	}
+    else if (screen_val == SCREEN_EVENT_KEYBOARD)
+    {
+    	screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_KEY_FLAGS, &screen_val);
+
+		if (screen_val & KEY_DOWN)
+		{
+			screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_KEY_SYM,&screen_val);
+
+			//printf("The '%c' (%d) key was pressed\n", (char)screen_val, screen_val);
+			//fflush(stdout);
+
+			// Special cases?
+			if (screen_val == 61453) 				// return
+				ofNotifyKeyPressed(OF_KEY_RETURN);
+			else if (screen_val == 61448) 			// backspace
+				ofNotifyKeyPressed(OF_KEY_BACKSPACE);
+			else if (screen_val == 8220) 			// left double quotation mark
+				return; //ofNotifyKeyPressed((int)"“");
+			else if (screen_val == 8221) 			// right double quotation mark
+				return; //ofNotifyKeyPressed((int)"”");
+			else
+				ofNotifyKeyPressed(screen_val);
+		}
+		else
+		{
+			screen_get_event_property_iv(screen_event, SCREEN_PROPERTY_KEY_SYM,&screen_val);
+
+			//printf("The '%c' key was released\n", (char)screen_val);
+			//fflush(stdout);
+
+			// Special cases?
+			if (screen_val == 61453) 				// return
+				ofNotifyKeyReleased(OF_KEY_RETURN);
+			else if (screen_val == 61448) 			// backspace
+				ofNotifyKeyReleased(OF_KEY_BACKSPACE);
+			else if (screen_val == 8220) 			// left double quotation mark
+				return; //ofNotifyKeyPressed((int)"“");
+			else if (screen_val == 8221) 			// right double quotation mark
+				return; //ofNotifyKeyPressed((int)"”");
+			else
+				ofNotifyKeyReleased(screen_val);
+		}
+    }
     else if (screen_val == SCREEN_EVENT_POINTER)
 	{
 		// Handle a mouse event here (simulator only)
@@ -480,6 +526,13 @@ int ofAppQNXWindow::qnxInitialize()
 		screen_destroy_context(screen_cxt);
 		return 0;
 	}
+
+    if (BPS_SUCCESS != virtualkeyboard_request_events(0)) {
+        fprintf(stderr, "navigator_request_events failed\n");
+        bbutil_terminate();
+        screen_destroy_context(screen_cxt);
+        return 0;
+    }
 
 	//Signal BPS library that navigator orientation is not to be locked
 	if (BPS_SUCCESS != navigator_rotation_lock(false)) {

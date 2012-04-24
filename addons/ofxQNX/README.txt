@@ -120,6 +120,10 @@ Next import:
 
 NEWS
 =======
+25/04/2012
+- Implemented keyboard (use a downward swipe gesture from the top to open the on-screen keyboard)
+- Updated qnxFontsExample example
+
 10/04/2012
 - ofxQNXSoundStream is now using SDL instead of QSA. Seems to be providing low latency audio without distortions.
 
@@ -147,8 +151,6 @@ TODO
 ====
 - Add instructions and patches required to compile the dependencies
 - Add GPS example
-- Add keyboard support (useful for qnxFontsExample example) 
--- https://bdsc.webapps.blackberry.com/native/documentation/keyboard_using_1935244_11.html
 - Implement ofxQNXSoundPlayer class (or try to use ofOpenALSoundPlayer)
 
 [Bugs]
