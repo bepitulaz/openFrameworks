@@ -120,6 +120,13 @@ Next import:
 
 NEWS
 =======
+26/04/2012
+- Changed data dir.
+- Private assets: ofToDataPath("", true) + "/app/native/assets/" (read-only)
+- Private data: ofToDataPath("", true) + "/data/" (Contains the application's private data. The application has full access to read and write files in this folder.)
+- Public data should be in: ofToDataPath("", true) + "/shared/XXX" (see link below for available subfolders)
+-- More info: https://bdsc.webapps.blackberry.com/native/documentation/com.qnx.doc.ide.userguide/topic/files_base_.html
+
 25/04/2012
 - Implemented keyboard (use a downward swipe gesture from the top to open the on-screen keyboard)
 - Updated qnxFontsExample example
