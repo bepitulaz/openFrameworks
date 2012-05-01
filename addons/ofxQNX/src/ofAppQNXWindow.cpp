@@ -274,14 +274,12 @@ ofOrientation ofAppQNXWindow::getOrientation()
 
 int	ofAppQNXWindow::getWidth()
 {
-	// TODO
-	return 1024;
+	return screenWidth;
 }
 
 int	ofAppQNXWindow::getHeight()
 {
-	// TODO
-	return 600;
+	return screenHeigth;
 }
 
 void ofAppQNXWindow::setFrameRate(float targetRate)
@@ -332,10 +330,13 @@ void ofAppQNXWindow::runAppLoop()
 				{
 					qnxHandleScreenEvent(event);
 				}
+				/*
+				// Disabled keyboard, use this call manually to bring up the keyboard.
 				else if ((domain == navigator_get_domain()) && (NAVIGATOR_SWIPE_DOWN == bps_event_get_code(event)))
 				{
 					virtualkeyboard_show();
 				}
+				*/
 				else if ((domain == navigator_get_domain()) && (NAVIGATOR_EXIT == bps_event_get_code(event)))
 				{
 					exit_application = 1;
@@ -541,6 +542,22 @@ int ofAppQNXWindow::qnxInitialize()
 		screen_destroy_context(screen_cxt);
 		return 0;
 	}
+
+
+	// Get screen dimensions
+	int count = 0;
+	screen_get_context_property_iv(screen_cxt, SCREEN_PROPERTY_DISPLAY_COUNT, &count);
+	screen_display_t *screen_disps = (screen_display_t *)calloc(count, sizeof(screen_display_t));
+	screen_get_context_property_pv(screen_cxt, SCREEN_PROPERTY_DISPLAYS, (void **)screen_disps);
+
+	screen_display_t screen_disp = screen_disps[0];
+	free(screen_disps);
+
+	int dims[2] = { 0, 0 };
+	screen_get_display_property_iv(screen_disp, SCREEN_PROPERTY_SIZE, dims);
+
+	screenWidth = dims[0];
+	screenHeigth = dims[1];
 
 	return 1;
 }

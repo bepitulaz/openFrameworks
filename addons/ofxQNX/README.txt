@@ -108,6 +108,11 @@ http://forum.openframeworks.cc/index.php/topic,9189.msg42786.html#msg42786
 
 NEWS
 ====
+01/05/2012
+- Updated code for screen dimensions
+- Disabled keyboard gesture, you can still use the methods by calling the keyboard functions on-demand:
+https://bdsc.webapps.blackberry.com/native/reference/com.qnx.doc.bps.lib_ref/com.qnx.doc.bps.lib_ref/topic/virtualkeyboard.h_functions_overview.html
+
 26/04/2012
 - Updated the instructions/readme and added a tutorial video.
 
