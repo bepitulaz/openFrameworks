@@ -123,6 +123,9 @@ class ofAppQNXWindow : public ofAppBaseWindow
 		unsigned long onesec;
 		bool bFrameRateSet;
 		unsigned long oneFrameTime;
+
+		int screenWidth;
+		int screenHeigth;
 };
 
 #endif /* OFAPPQNXWINDOW_H_ */

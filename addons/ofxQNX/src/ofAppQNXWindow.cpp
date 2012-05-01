@@ -68,6 +68,9 @@ ofAppQNXWindow::ofAppQNXWindow()
 	oneFrameTime = 0;
 
 	mousePressed = false;
+
+	screenWidth = 1024;
+	screenHeigth = 600;
 }
 
 ofAppQNXWindow::~ofAppQNXWindow()
