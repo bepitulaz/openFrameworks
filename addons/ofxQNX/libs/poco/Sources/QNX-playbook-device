@@ -42,10 +42,10 @@ SHAREDLIBLINKEXT = .so
 #
 # Compiler and Linker Flags
 #
-CFLAGS          = 
+CFLAGS          = -fPIC
 CFLAGS32        =
 CFLAGS64        =
-CXXFLAGS        =
+CXXFLAGS        = -fPIC
 CXXFLAGS32      =
 CXXFLAGS64      =
 LINKFLAGS       =

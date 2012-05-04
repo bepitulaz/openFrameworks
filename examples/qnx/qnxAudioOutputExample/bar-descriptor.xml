@@ -51,34 +51,20 @@
     <configuration id="com.qnx.qcc.configuration.exe.debug.2136424254" name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Debug/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
-       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/lib/Device-Debug/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
-       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/lib/Device-Debug/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/libPlayBook/Device-Debug/libSDL.so}" type="Qnx/Elf">lib/libSDL.so</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/libPlayBook/Device-Debug/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.release.2096755720" name="Device-Release">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="Device-Release/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
-    </configuration>
-    <configuration id="com.qnx.qcc.configuration.exe.profile.506414136" name="Device-Profile">
-       <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="Device-Profile/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
-    </configuration>
-    <configuration id="com.qnx.qcc.configuration.exe.profile.coverage.323859230" name="Device-Coverage">
-       <platformArchitecture>armle-v7</platformArchitecture>
-       <asset path="Device-Coverage/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/libPlayBook/Device-Release/libSDL.so}" type="Qnx/Elf">lib/libSDL.so</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/libPlayBook/Device-Release/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     </configuration>
     <configuration id="com.qnx.qcc.configuration.exe.debug.886947137" name="Simulator-Debug">
        <platformArchitecture>x86</platformArchitecture>
        <asset path="Simulator-Debug/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
-       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/lib/Simulator-Debug/libSDL12.so}" type="Qnx/Elf">lib/libSDL12.so</asset>
-       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/lib/Simulator/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
-    </configuration>
-    <configuration id="com.qnx.qcc.configuration.exe.profile.854364533" name="Simulator-Profile">
-       <platformArchitecture>x86</platformArchitecture>
-       <asset path="Simulator-Profile/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
-    </configuration>
-    <configuration id="com.qnx.qcc.configuration.exe.profile.coverage.1890969643" name="Simulator-Coverage">
-       <platformArchitecture>x86</platformArchitecture>
-       <asset path="Simulator-Coverage/qnxAudioOutputExample" entry="true" type="Qnx/Elf">qnxAudioOutputExample</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/SDL/libPlayBook/Simulator-Debug/libSDL.so}" type="Qnx/Elf">lib/libSDL.so</asset>
+       <asset path="${workspace_loc:/addons/ofxQNX/libs/TouchControlOverlay/libPlayBook/Simulator-Debug/libTouchControlOverlay.so}" type="Qnx/Elf">lib/libTouchControlOverlay.so</asset>
     </configuration>
     
     <!--  The icon for the application, which should be 86x86. -->

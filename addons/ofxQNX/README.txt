@@ -108,6 +108,11 @@ http://forum.openframeworks.cc/index.php/topic,9189.msg42786.html#msg42786
 
 NEWS
 ====
+04/05/2012
+- Updated project files
+- Updated libraries for PlayBook and BB10 target
+- Added instructions on how to build Poco and FreeImage for both platforms (including makefiles), check the Sources folder.
+
 01/05/2012
 - Updated code for screen dimensions
 - Disabled keyboard gesture, you can still use the methods by calling the keyboard functions on-demand:

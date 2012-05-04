@@ -519,14 +519,22 @@ bool ofIsStringInString(string haystack, string needle){
 //--------------------------------------------------
 string ofToLower(const string & src){
 	string dst(src);
+#if defined TARGET_QNX
+	transform(src.begin(),src.end(),dst.begin(),tolower);
+#else
 	transform(src.begin(),src.end(),dst.begin(),::tolower);
+#endif
 	return dst;
 }
 
 //--------------------------------------------------
 string ofToUpper(const string & src){
 	string dst(src);
+#if defined TARGET_QNX
+	transform(src.begin(),src.end(),dst.begin(),toupper);
+#else
 	transform(src.begin(),src.end(),dst.begin(),::toupper);
+#endif
 	return dst;
 }
 
