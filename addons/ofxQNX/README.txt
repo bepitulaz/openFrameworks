@@ -1,6 +1,6 @@
 PROJECT INFORMATION
 ===================
-ofxQNX - BlackBerry PlayBook add-on for openFrameworks
+ofxQNX - BlackBerry PlayBook and BlackBerry 10 add-on for openFrameworks
 
 Project page:
 - http://www.multigesture.net/projects/ofxqnx/
@@ -22,10 +22,15 @@ New BSD License (3-clause license)
 
 INTRO
 =====
-This add-on attempts to bring the openFrameworks platform to the BlackBerry PlayBook. 
+This add-on attempts to bring the openFrameworks platform to the BlackBerry PlayBook and BlackBerry 10. 
 
+BlackBerry PlayBook
 To compile the project you will need to install the BlackBerry Native SDK 2.0 (and Eclipse):
 - https://bdsc.webapps.blackberry.com/native/
+
+BlackBerry 10
+To compile the project you will need to install the BlackBerry 10 Native SDK (and Eclipse):
+- https://bdsc.webapps.blackberry.com/cascades/download
 
 
 QUICK START
@@ -39,7 +44,7 @@ After the IDE is running, import the following projects:
 - "openFrameworks\libs"
 - "openFrameworks\addons"
 - "openFrameworks\addons\ofxQNX"
-- The example projects under "openFrameworksPlayBook\examples\qnx"
+- The example projects (BB10 or PlayBook) under "openFrameworksPlayBook\examples\qnx"
 
 Click on any of the example projects, build and run.
 
@@ -71,6 +76,7 @@ https://bdsc.webapps.blackberry.com/native/documentation/porting_overview_197089
 * FreeImage 
 - http://freeimage.sourceforge.net/
 - Using version 3.14.1 and removed support for EXR to make it compile.
+- Sources folder contains instructions on how to compile this library
 
 * GLU
 - Since no GLU is included with the Native SDK I am using the one from:
@@ -87,13 +93,7 @@ https://bdsc.webapps.blackberry.com/native/documentation/porting_overview_197089
 * Poco
 - http://pocoproject.org/
 - Version 1.4.3
-- This can only be compiled on a Linux machine. Included files are compiled on Ubuntu Linux 11.10
-- To generate the makefiles: ./configure --config=QNX --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix=/home/falcon4ever/pocoplaybook
-- You might need a bogus syslog.h (borrow from the Android NDK?)
-- For the x86 build, add these extra flags: -m32 -march=i486
-- Modify the QNX config as posted here: http://pocoproject.org/forum/viewtopic.php?f=12&t=5318
-- Now you should be able to build it.
-- Linker flags: -lPocoNet -lPocoUtil -lPocoXML -lPocoFoundation -lsocket
+- Sources folder contains instructions on how to compile this library (Linux / Mac only)
 
 * SDL
 - Add __PLAYBOOK__ to your project if you use Audio/SDL
@@ -108,8 +108,11 @@ http://forum.openframeworks.cc/index.php/topic,9189.msg42786.html#msg42786
 
 NEWS
 ====
+
+05/05/2012
+- Updated project files for PlayBook and BB10 target
+
 04/05/2012
-- Updated project files
 - Updated libraries for PlayBook and BB10 target
 - Added instructions on how to build Poco and FreeImage for both platforms (including makefiles), check the Sources folder.
 
@@ -241,6 +244,7 @@ These are already set in the example projects.
 - __PLAYBOOK__
 
 * Libraries (-l)
+- m
 - bps
 - screen
 - EGL

@@ -1,5 +1,5 @@
 /*
-	ofxQNX - BlackBerry PlayBook add-on for openFrameworks
+	ofxQNX - BlackBerry PlayBook and BlackBerry 10 add-on for openFrameworks
 
 	Copyright (c) 2012, Laurence Muller (www.multigesture.net)
 	All rights reserved.

@@ -6,7 +6,9 @@ Instructions:
 2. Copy all QNX-* files to [root]\build\config
 3. Load the environment variables in the console (from the SDK folder):
    $ source bbndk-env.sh
-4. Run one of the following commands (modify the prefix):
+4. Copy syslog.h to your SDK's include folder (e.g. [SDK root]\target\qnx6\usr\include)
+   Note: this file comes from the Android NDK
+5. Run one of the following commands (modify the prefix):
 
 PlayBook target (ARMv7):
 ./configure --config=QNX-playbook-device --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix=/Users/lmuller/PocoPlayBook/ARMv7
@@ -20,8 +22,8 @@ BB10 target (ARMv7):
 BB10 simulator (X86):
 ./configure --config=QNX-bb10-sim --omit=NetSSL_OpenSSL,Crypto,Data/ODBC,Data/MySQL --no-tests --no-samples --static --prefix=/Users/lmuller/PocoBB10/X86
 
-5. Type:
+6. Type:
 make -s
 
-6. Install it:
+7. Install it:
 make install
