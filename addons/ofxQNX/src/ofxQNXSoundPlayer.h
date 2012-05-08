@@ -60,6 +60,7 @@ public:
 	float getSpeed() { return 0; };
 	float getPan() { return 0; };
 	bool getIsPaused() { return false; };
+	bool isLoaded() {  return false; };
 	float getVolume() {  return 0; };
 };
 
